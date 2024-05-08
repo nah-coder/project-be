@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    Thêm Sản Phẩm
+    <form th:action="@{/update-payment/{id}(id = ${id})}" method="post" th:object="${paymentDTO}">
+        <table>
+            <tr>
+                <td>id:</td>
+                <td>
+                    <input type="number" th:field="${paymentDTO.id}">
+                </td>
+            </tr>
+            <tr>
+                <td>name:</td>
+                <td>
+                    <input type="number" th:field="${paymentDTO.name}">
+                </td>
+            </tr>
+            <tr>
+                <td>notes:</td>
+                <td>
+                    <input type="file" th:field="${paymentDTO.notes}">
+                </td>
+            </tr>
+            <tr>
+                <td>created_date:</td>
+                <td>
+                    <input type="datetime-local" th:field="${paymentDTO.createdDate}">
+                </td>
+            </tr>
+            <tr>
+                <td>update_date:</td>
+                <td>
+                    <input type="datetime-local" th:field="${paymentDTO.updatedDate}">
+                </td>
+            </tr>
+            <tr>
+                <td>isactive:</td>
+                <td>
+                    <input type="number" th:field="${paymentDTO.isactive}">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</h1>
+</body>
+</html>

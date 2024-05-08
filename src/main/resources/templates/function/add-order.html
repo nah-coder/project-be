@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm Sản Phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+      color: #333;
+      font-size: 24px;
+    }
+
+    form {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="datetime-local"],
+    input[type="submit"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<h1>
+  Thêm Sản Phẩm
+  <form th:action="@{/order-save}" method="post" th:object="${orderDTO}">
+    <table>
+      <tr>
+        <td>id:</td>
+        <td>
+          <input type="number" th:field="${orderDTO.id}">
+        </td>
+      </tr>
+      <tr>
+        <td>idorders:</td>
+        <td>
+          <input type="number" th:field="${orderDTO.idorders}">
+        </td>
+      </tr>
+      <tr>
+        <td>orderdate:</td>
+        <td>
+          <input type="datetime-local" th:field="${orderDTO.ordersDate}">
+        </td>
+      </tr>
+      <tr>
+        <td>idcustomer:</td>
+        <td>
+          <input type="number" th:field="${orderDTO.idcustomer}">
+        </td>
+      </tr>
+      <tr>
+        <td>totalMoney:</td>
+        <td>
+          <input type="number" th:field="${orderDTO.totalMoney}">
+        </td>
+      </tr>
+      <tr>
+        <td>notes:</td>
+        <td>
+          <input type="text" th:field="${orderDTO.notes}">
+        </td>
+      </tr>
+      <tr>
+        <td>nameReciver:</td>
+        <td>
+          <input type="text" th:field="${orderDTO.nameReciver}">
+        </td>
+      </tr>
+      <tr>
+        <td>address:</td>
+        <td>
+          <input type="text" th:field="${orderDTO.address}">
+        </td>
+      </tr>
+      <tr>
+        <td>phone:</td>
+        <td>
+          <input type="number" th:field="${orderDTO.phone}">
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="submit" value="submit"/>
+        </td>
+      </tr>
+    </table>
+  </form>
+</h1>
+</body>
+</html>

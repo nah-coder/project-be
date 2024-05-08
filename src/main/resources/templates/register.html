@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="">
+    <h2>Đăng ký tài khoản</h2>
+
+    <div class="form-group">
+        <label for="fullname">Họ và tên:</label>
+        <input type="text" id="fullname" name="fullname" class="form-control" required><br><br>
+    </div>
+    <div class="form-group">
+        <label for="username">Tài khoản:</label>
+        <input type="text" id="username" name="username" class="form-control" required><br><br>
+    </div>
+    <div class="form-group">
+        <label for="password">Mật khẩu:</label>
+        <input type="password" id="password" name="password" class="form-control" required><br><br>
+    </div>
+    <div class="form-group">
+        <label for="repassword">Nhập lại mật khẩu:</label>
+        <input type="password" id="repassword" name="repassword" class="form-control" required><br><br>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required><br><br>
+    </div>
+    <div class="form-group">
+        <label for="phone">Số điện thoại:</label>
+        <input type="tel" id="phone" name="phone" class="form-control" required><br><br>
+    </div>
+    <input type="submit" class="btn btn-primary btn-block mt-4" name="btn-reg" value="Đăng ký">
+</form>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../font/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Thiết lập font chữ và margin mặc định */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+        }
+
+        .add-button a,
+        .update-button a,
+        .detail-button a,
+        .delete-button a {
+            color: #000; /* Đổi màu chữ thành đen */
+            text-decoration: none; /* Mất dấu gạch chân */
+        }
+
+        /* CSS cho sidebar */
+        .sidebar {
+            position: fixed; /* Đặt sidebar ở vị trí cố định */
+            top: 0; /* Đặt sidebar ở phía trên của viewport */
+            left: 0; /* Đặt sidebar ở bên trái của viewport */
+            width: 260px;
+            height: 100vh; /* Chiều cao của .sidebar bằng chiều cao của viewport */
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            padding-top: 20px;
+        }
+
+        .sidebar ul li .icon {
+            width: 20px; /* Độ rộng của icon */
+            display: inline-block; /* Cho phép cân chỉnh kích thước của icon */
+            text-align: center; /* Căn giữa theo chiều ngang */
+            margin-right: 10px; /* Khoảng cách giữa icon và nội dung */
+        }
+
+        .sidebar ul li a {
+            display: inline-block; /* Cho phép cân chỉnh kích thước của nội dung */
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+        }
+        /***********************/
+                .sidebar ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .sidebar ul li {
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                    margin-bottom: 20px;
+                }
+
+                .sidebar ul li a {
+                    text-decoration: none;
+                    color: #333;
+                }
+
+                .sidebar ul li a:hover {
+                    color: #555;
+                }
+
+                /* CSS cho nội dung */
+        .content {
+            margin-left: 250px; /* Độ lớn của sidebar */
+            width: calc(100% - 250px); /* Chiều rộng của nội dung bằng 100% trừ đi chiều rộng của sidebar */
+            padding: 20px;
+        }
+
+        /* CSS cho bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="menu-center">
+        <div class="logo" style="text-align: center">
+            <a href="/myhome"><img style="width: 150px;" src="images/logos/it_logo.png"></a>
+        </div>
+    </div>
+    <ul>
+        <li>
+            <a href="/myhome"> <h4>Trang chủ</h4></a>
+        </li>
+        <li>
+            <span class="icon"><i class="fas fa-box-open"></i></span>
+            <a href="/admin">Quản lý sản phẩm</a>
+        </li>
+        <li>
+            <span class="icon"><i class="fas fa-money-check"></i></span>
+            <a href="/payment">Phương thức thanh toán</a>
+        </li>
+        <li>
+            <span class="icon"><i class="fas fa-shipping-fast"></i></span>
+            <a href="/transport">Phương thức vận chuyển</a>
+        </li>
+        <li>
+            <span class="icon"><i class="fas fa-users"></i></span>
+            <a href="/custommer">Quản lý khách hàng</a>
+        </li>
+        <li>
+            <span class="icon"><i class="fas fa-file-invoice"></i></span>
+            <a href="/order">Quản lý Đơn hàng</a>
+        </li>
+        <li class="class="last-item"">
+            <span class="icon"><i class="fas fa-list-alt"></i></span>
+            <a href="/product">Quản lý danh mục sản phẩm</a>
+        </li>
+        <!-- Thêm các mục menu khác tại đây -->
+    </ul>
+</div>
+<div class="content">
+    <h1>Danh sách Khách hàng</h1>
+    <table>
+        <div class="add-button">
+            <a th:href="@{/view/add-customer}">
+                Thêm Khách Hàng
+                <i class="fa-solid fa-circle-plus"></i>
+            </a>
+        </div>
+        <thead>
+        <tr>
+            <th> ID</th>
+            <th> name</th>
+            <th> username</th>
+            <th> password</th>
+            <th> address</th>
+            <th> email</th>
+            <th> phone</th>
+            <th> created_date</th>
+            <th> isactive</th>
+            <th> Sửa</th>
+            <th> Xoá</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="custommer :${custommer}">
+            <td><div th:text="${custommer.id}"></div></td>
+            <td><div th:text="${custommer.name}"></div></td>
+            <td><div th:text="${custommer.username}"></div></td>
+            <td><div th:text="${custommer.password}"></div></td>
+            <td><div th:text="${custommer.address}"></div></td>
+            <td><div th:text="${custommer.email}"></div></td>
+            <td><div th:text="${custommer.phone}"></div></td>
+            <td><div th:text="${custommer.createdDate}"></div></td>
+            <td><div th:text="${custommer.isactive}"></div></td>
+            <td>
+                <div class="update-button">
+                    <a th:href="@{/update-custommer/{id}(id = ${custommer.id})}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="delete-button">
+                    <a th:href="@{/delete-custommer/{id}(id = ${custommer.id})}">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>

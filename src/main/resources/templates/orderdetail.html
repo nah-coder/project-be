@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .order-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px; /* Thêm khoảng cách phía dưới */
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.5); /* Đặt độ mờ cho đường viền */
+        font-size: 16px; /* Kích thước chữ */
+    }
+
+    .label {
+        color: #333;
+        font-weight: bold;
+        width: 200px; /* Độ rộng cố định cho nhãn */
+        margin-right: 20px; /* Khoảng cách giữa nhãn và giá trị */
+        font-size: 18px; /* Kích thước chữ */
+    }
+
+    .order-value {
+        color: #333;
+        margin-left: 20px; /* Thêm khoảng cách giữa hai thẻ label */
+    }
+
+
+    .sidebar {
+        background-color: #f0f0f0;
+        padding: 20px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 220px; /* Thay đổi độ rộng */
+        height: 100%;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+    }
+
+    .menu-center {
+        text-align: center;
+        margin-bottom: 20px; /* Thêm khoảng cách phía dưới */
+    }
+
+    .logo img {
+        width: 150px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        padding: 15px 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px; /* Tăng kích thước chữ */
+        display: flex;
+        align-items: center;
+    }
+
+    a:hover {
+        color: #1c1cd2;
+    }
+
+    /* CSS cho icon */
+    .icon {
+        margin-right: 10px;
+    }
+
+    /* CSS cho trang chi tiết đơn hàng */
+    .page-title {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-left: 100px;
+    }
+
+    /* CSS cho thẻ card */
+    .card {
+        padding: 20px;
+        max-width: 1100px; /* Thay đổi độ rộng tối đa */
+        background-color: #fff;
+        border-radius: 10px; /* Bo tròn các góc */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Điều chỉnh độ mờ của bóng đổ */
+        margin-left: 20px; /* Thay đổi margin-left */
+        margin-top: 50px; /* Thêm khoảng cách phía trên */
+        margin-bottom: 50px; /* Thêm khoảng cách phía dưới */
+    }
+
+    /* Kiểu cho thông tin đơn hàng */
+    .order-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.5); /* Đặt độ mờ cho đường viền */
+        font-size: 16px; /* Tăng kích thước chữ */
+    }
+
+    /* Kiểu cho nhãn */
+    .label {
+        color: #333;
+        font-weight: bold;
+        width: 200px; /* Đặt chiều rộng cố định cho nhãn */
+        margin-right: 20px; /* Khoảng cách giữa nhãn và giá trị */
+        font-size: 18px; /* Tăng kích thước chữ */
+    }
+
+    /* Kiểu cho giá trị đơn hàng */
+    .order-value {
+        color: #333;
+    }
+
+    .product-table {
+        margin-left: 20px; /* Thay đổi margin-left */
+        border-collapse: collapse; /* Gộp viền của các ô lại với nhau */
+        width: 50%;
+    }
+
+    .product-table th, .product-table td {
+        padding: 8px; /* Thêm padding cho cả thẻ th và td */
+        text-align: left; /* Căn trái nội dung của cả thẻ th và td */
+        border-bottom: 1px solid #ddd; /* Đường kẻ ngang dưới của mỗi hàng */
+    }
+
+    .product-table th {
+        color: #333; /* Màu chữ cho dòng tiêu đề */
+    }
+</style>
+<body>
+<div class="content">
+    <h1>Danh sách đơn đặt hàng</h1>
+    <div class="card">
+        <div th:each="order: ${order}" class="order-details">
+            <div class="order-info">
+                <label class="label">ID:</label>
+                <label th:text="${order.ID}" class="order-value"></label>
+            </div>
+
+            <div class="order-info">
+                <label class="label">IDORDERS:</label>
+                <label th:text="${order.IDORDERS}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">ORDERS_DATE</label>
+                <label th:text="${order.ORDERS_DATE}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">IDCUSTOMER</label>
+                <label th:text="${order.IDCUSTOMER}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">TOTAL_MONEY</label>
+                <label th:text="${order.TOTAL_MONEY}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label"> Order_notes</label>
+                <label th:text="${order.Order_notes}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">NAME_RECIVER</label>
+                <label th:text="${order.NAME_RECIVER}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">ADDRESS</label>
+                <label th:text="${order.ADDRESS}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">PHONE</label>
+                <label th:text="${order.PHONE}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">Paymentmethodname</label>
+                <label th:text="${order.Paymentmethodname}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">PHONE</label>
+                <img class="order-value" th:src="'../images/logos/' + ${order.Paymentmethodnotes}" style="width:100px;">
+            </div>
+            <div class="order-info">
+                <label class="label">Orderspaymenttotal</label>
+                <label th:text="${order.Orderspaymenttotal}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">Transportmethodname</label>
+                <label th:text="${order.Transportmethodname}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">Transportmethodnotes</label>
+                <label th:text="${order.Transportmethodnotes}" class="order-value"></label>
+            </div>
+            <div class="order-info">
+                <label class="label">Orderstransporttotal</label>
+                <label th:text="${order.Orderstransporttotal}" class="order-value"></label>
+            </div>
+
+        </div>
+    </div>
+    <table class="product-table">
+        <thead>
+        <tr>
+            <th colspan="3" style="text-align: center">Sản phẩm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order :${orderdetailcate}">
+            <td>
+                <div th:text="${order.Product_name}"></div>
+            </td>
+            <td>
+                <div th:text="${#numbers.formatDecimal(order.Product_price, 0, 'COMMA', 0, 'POINT')}"></div>
+            </td>
+            <td><img th:src="'../images/it_service/' + ${order.Product_image}" style="width:100px;"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

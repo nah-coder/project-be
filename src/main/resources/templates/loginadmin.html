@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #form-login {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #form-login h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 30px 10px 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+
+        #eye {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-text {
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post" id="form-login">
+    <h2><b> Đăng nhập cho quản lý</b></h2>
+    <div class="form-group">
+        <i class="far fa-user"></i>
+        <input type="text" id="username" name="username" class="form-input" placeholder="Tên đăng nhập">
+    </div>
+    <div class="form-group">
+        <i class="fas fa-key"></i>
+        <input type="password" id="password" name="password" class="form-input" placeholder="Mật khẩu">
+        <div id="eye">
+            <i class="far fa-eye"></i>
+        </div>
+    </div>
+    <button type="submit" name="btn-login" class="button login">
+        <span class="button-text">
+            Đăng nhập
+        </span>
+    </button>
+</form>
+</body>
+</html>
