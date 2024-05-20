@@ -9,6 +9,27 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <!-- site metas -->
 <title>It.Next - IT Service Responsive Html Theme</title>
+    <style>
+      /* General form-control styling */
+      .form-control {
+        /* Add your desired styles here */
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      /* Specific styling for the input field inside the table */
+      table tr .form-control {
+        text-align: center;
+        /* Additional styles if needed */
+      }
+      /* Styling for input fields inside the table with ID 'cart-table' */
+      #cart-table .form-control {
+        text-align: center;
+        /* Additional styles if needed */
+      }
+
+    </style>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -178,62 +199,60 @@
           <table class="table">
             <thead>
               <tr>
+<!--                <th>ID</th>-->
                 <th>Product</th>
                 <th>Quantity</th>
                 <th class="text-center">Price</th>
-                <th class="text-center">Total</th>
+<!--                <th class="text-center">Total</th>-->
                 <th> </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="col-sm-8 col-md-6"><div class="media"> <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/it_service/1.jpg" alt="#"></a>
+              <tr th:each="CART_ITEM : ${CART_ITEM}">
+                <form action="/update" method="post">
+                <input type="hidden" name="id" th:value="${CART_ITEM.productId}">
+                <!--              <td th:text="${CART_ITEM.productId}"></td>-->
+                <td class="col-sm-8 col-md-6">
+                  <div class="media">
+                    <a class="thumbnail pull-left" href="#">
+                      <img class="media-object" th:src="'../images/it_service/' + ${CART_ITEM.image}">
+                    </a>
                     <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Norton Internet Security</a></h4>
-                      <span>Status: </span><span class="text-success">In Stock</span> </div>
-                  </div></td>
-                <td class="col-sm-1 col-md-1" style="text-align: center"><input class="form-control" value="3" type="email">
+                      <h4 class="media-heading">
+                        <a href="#" th:text="${CART_ITEM.name}"></a>
+                      </h4>
+                      <span>Status: </span><span class="text-success">In Stock</span>
+                    </div>
+                  </div>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1"><button type="button" class="bt_main"><i class="fa fa-trash"></i> Remove</button></td>
-              </tr>
-              <tr>
-                <td class="col-md-6"><div class="media"> <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/it_service/2.jpg" alt="#"></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Kaspersky Internet Security</a></h4>
-                      <span>Status: </span><span class="text-danger">Out Stock</span> </div>
-                  </div></td>
-                <td class="col-md-1" style="text-align: center"><input class="form-control" value="2" type="email">
+                <td class="col-sm-1 col-md-1" style="text-align: center">
+                  <input class="form-control" style="margin-top: 37px" name="qty" th:value="${CART_ITEM.qty}" type="number">
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-md-1"><button type="button" class="bt_main"><i class="fa fa-trash"></i> Remove</button></td>
-              </tr>
-              <tr>
-                <td class="col-sm-8 col-md-6"><div class="media"> <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/it_service/3.jpg" alt="#"></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Mcafee Livesafe Antivirus</a></h4>
-                      <span>Status: </span><span class="text-success">In Stock</span> </div>
-                  </div></td>
-                <td class="col-sm-1 col-md-1" style="text-align: center"><input class="form-control" value="3" type="email">
+                <td class="col-sm-1 col-md-1 text-center">
+                  <p class="price_table" th:text="${#numbers.formatDecimal(CART_ITEM.price, 0, 'COMMA', 2, 'POINT')}"></p>
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1"><button type="button" class="bt_main"><i class="fa fa-trash"></i> Remove</button></td>
-              </tr>
-              <tr>
-                <td class="col-md-6"><div class="media"> <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/it_service/4.jpg" alt="#"></a>
-                    <div class="media-body">
-                      <h4 class="media-heading"><a href="#">Norton Internet Security</a></h4>
-                      <span>Status: </span><span class="text-danger">Out Stock</span> </div>
-                  </div></td>
-                <td class="col-md-1" style="text-align: center"><input class="form-control" value="2" type="email">
+                <td class="col-sm-1 col-md-1">
+<!--                  <button type="button" >-->
+                    <a class="bt_main" th:href="@{/remove/{productId}(productId = ${CART_ITEM.productId})}">
+                    <i class="fa fa-trash"></i> Remove
+                    </a>
+<!--                  </button>-->
                 </td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-sm-1 col-md-1 text-center"><p class="price_table">$25.00</p></td>
-                <td class="col-md-1"><button type="button" class="bt_main"><i class="fa fa-trash"></i> Remove</button></td>
+<!--                  <td class="col-sm-1 col-md-1">-->
+<!--                    <a  th:href="@{/remove/{productId}(productId=${CART_ITEM.productId})}" class="btn btn-main">-->
+<!--                      <i class="fa fa-trash"></i> Xóa-->
+<!--                    </a>-->
+<!--                  </td>-->
+                </form>
               </tr>
+            <tr>
+              <p th:text="${#numbers.formatDecimal(TOTAL, 2, 0)} + 'VNĐ'"></p>
+            </tr>
+            <tr>
+              <a href="/clear">Clear</a>
+              <a href="/show_shop">Addmore</a>
+            </tr>
+
             </tbody>
           </table>
           <table class="table">
@@ -258,7 +277,7 @@
               </tr>
               <tr>
                 <td><h4>Subtotal</h4></td>
-                <td class="text-right"><h4>$50.00</h4></td>
+                <td class="text-right"><p th:text="${#numbers.formatDecimal(TOTAL, 2, 0)} + 'VNĐ'"></p></td>
               </tr>
               <tr>
                 <td><h5>Estimated shipping</h5></td>
@@ -269,8 +288,8 @@
                 <td class="text-right"><h4>$55.00</h4></td>
               </tr>
               <tr>
-                <td><button type="button" class="button">Continue Shopping</button></td>
-                <td><button class="button">Checkout</button></td>
+                <td><button type="button" class="button"><a href="/show_shop">Addmore</a></button></td>
+                <td><button class="button"><a href="/clear">Clear</a></button></td>
               </tr>
             </tbody>
           </table>
@@ -306,7 +325,7 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="testimonial-container">
-                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
+                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first.
                     I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="images/it_service/client1.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">
@@ -316,7 +335,7 @@
               </div>
               <div class="carousel-item">
                 <div class="testimonial-container">
-                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
+                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first.
                     I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="images/it_service/client2.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">
@@ -326,7 +345,7 @@
               </div>
               <div class="carousel-item">
                 <div class="testimonial-container">
-                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
+                  <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first.
                     I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="images/it_service/client3.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">

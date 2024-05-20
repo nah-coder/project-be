@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        form {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        input[type="submit"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>
+    Thêm Sản Phẩm
+    <form th:action="@{/orderdetail-save/{id}(id=${ID})}" method="post" th:object="${OrdersDetails}">
+        <div class="form-group">
+            <label>ID khách hàng:</label>
+            <input type="text" class="form-control" th:value="${ID}">
+        </div>
+        <div class="form-group">
+            <label for="productId">Chọn sản phẩm:</label>
+            <select class="form-control" id="productId" name="idproduct">
+                <option value="">Chọn sản phẩm</option>
+                <option th:each="product : ${productList}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+        <button name="sbm" class="btn btn-success" type="submit">Thêm Sản Phẩm</button>
+    </form>
+
+</h1>
+</body>
+</html>

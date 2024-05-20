@@ -9,6 +9,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
+        .toggle-button {
+            background-color: #ddd; /* Màu nền mặc định của nút */
+            border: none;
+            color: #fff; /* Màu chữ mặc định của nút */
+            padding: 8px 16px; /* Điều chỉnh độ lớn của nút */
+            border-radius: 20px; /* Bo tròn các góc của nút */
+            cursor: pointer;
+        }
+
+        .toggle-button.active {
+            background-color: #007bff; /* Màu nền khi nút được kích hoạt */
+        }
+
+        .toggle-button .on {
+            display: none; /* Mặc định ẩn nút bật */
+        }
+
+        .toggle-button.active .on {
+            display: inline; /* Hiển thị nút bật khi nút được kích hoạt */
+        }
+
+        .toggle-button .off {
+            display: inline; /* Hiển thị nút tắt mặc định */
+        }
+
+        .toggle-button.active .off {
+            display: none; /* Ẩn nút tắt khi nút được kích hoạt */
+        }
+
         /* Thiết lập font chữ và margin mặc định */
         body {
             font-family: Arial, sans-serif;
@@ -123,7 +152,7 @@
         </li>
         <li>
             <span class="icon"><i class="fas fa-box-open"></i></span>
-            <a href="/admin">Quản lý sản phẩm</a>
+            <a href="/admin">Quản lý danh mục sản phẩm</a>
         </li>
         <li>
             <span class="icon"><i class="fas fa-money-check"></i></span>
@@ -143,7 +172,7 @@
         </li>
         <li>
             <span class="icon"><i class="fas fa-list-alt"></i></span>
-            <a href="/product">Quản lý danh mục sản phẩm</a>
+            <a href="/product">Quản lý sản phẩm</a>
         </li>
         <!-- Thêm các mục menu khác tại đây -->
     </ul>
@@ -171,15 +200,16 @@
         <thead>
         <tr>
             <th> ID</th>
+            <th> Tên Sản Phẩm</th>
+            <th> Ghi Chú</th>
+            <th> Hình Ảnh</th>
             <th> idparent</th>
-            <th> name</th>
-            <th> notes</th>
-            <th> icon</th>
-            <th> created_date</th>
-            <th> updated_date</th>
-            <th> created_by</th>
-            <th> updated_by</th>
-            <th> isactive</th>
+            <th> Trạng thái</th>
+            <th> Ngày nhập</th>
+            <th> Ngày sửa</th>
+            <th> Người nhập</th>
+            <th> Người sửa</th>
+            <th> Trạng thái</th>
             <th> Sửa</th>
             <th> Xoá</th>
         </tr>
@@ -189,9 +219,7 @@
             <td>
                 <div th:text="${category.id}"></div>
             </td>
-            <td>
-                <div th:text="${category.idparent}"></div>
-            </td>
+
             <td>
                 <div th:text="${category.name}"></div>
             </td>
@@ -199,6 +227,15 @@
                 <div th:text="${category.notes}"></div>
             </td>
             <td><img th:src="'../images/it_service/'+${category.icon} " style="width:100px;"></td>
+            <td>
+                <div th:text="${category.idparent}"></div>
+            </td>
+            <td>
+                <button class="toggle-button" th:classappend="${category.isactive == 1}?'active' : ''" th:attr="data-payment-id=${category.id}">
+                    <span class="on">Bật</span>
+                    <span class="off">Tắt</span>
+                </button>
+            </td>
             <td>
                 <div th:text="${category.createdDate}"></div>
             </td>
@@ -238,9 +275,29 @@
             <li th:if="${currentPage < totalPage}" class="page-item"><a class="page-link" th:href="@{'?pageno='+${currentPage+1}}">>></a></li>
         </ul>
     </nav>
-
-
 </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('.toggle-button').click(function () {
+            $(this).toggleClass('active');
+            if ($(this).hasClass('active')) {
+                $(this).find('.on').show();
+                $(this).find('.off').hide();
+            } else {
+                $(this).find('.on').hide();
+                $(this).find('.off').show();
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

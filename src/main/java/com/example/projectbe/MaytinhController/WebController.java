@@ -31,6 +31,7 @@ public class WebController {
     @Autowired
     OrderRepository orderRepository;
 
+
     @GetMapping("/admin")
     public String showcategory(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageno" , defaultValue = "1")Integer pageno) {
         Page<Category> categories = maytinhService.findAllpage(pageno);
@@ -107,11 +108,7 @@ public class WebController {
         return "layout/it_shop_detail";
     }
 
-    @GetMapping("/show_cart")
-    public String showcart(Model model) {
-        model.addAttribute("categoryDTO", new Category());
-        return "layout/it_cart";
-    }
+
 
     @GetMapping("/show_checkout")
     public String showcheckout(Model model) {
@@ -302,6 +299,8 @@ public class WebController {
         return "order";
     }
 
+
+
     @GetMapping("/view/add-order")
     public String showAddorder(Model model) {
         model.addAttribute("orderDTO", new Orders());
@@ -457,9 +456,15 @@ public class WebController {
 
     ///////productttttttttt
     @GetMapping("/product")
-    public String showproduct(Model model) {
-        List<Product> products = productService.findAll();
-        model.addAttribute("product_all", products);
+    public String showproduct(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageno" , defaultValue = "1")Integer pageno) {
+        Page<Product> productPage = productService.findAllpage(pageno);
+        if(keyword!=null && !keyword.isEmpty()){
+            productPage = this.productService.searchProduct(keyword,pageno);
+            model.addAttribute("keyword", keyword);
+        }
+        model.addAttribute("totalPage",productPage.getTotalPages());
+        model.addAttribute("currentPage",pageno);
+        model.addAttribute("product_all", productPage);
         return "product";
     }
 
@@ -519,17 +524,39 @@ public class WebController {
         model.addAttribute("id", id);
         return "orderdetail";
     }
+
+    @GetMapping("/view/add-orderdetail/{id}")
+    public String showAddorderdetail(Model model, @PathVariable("id") int id) {
+//        List<Ioder> orderdetailcate = orderService.findbyidorderdetailcate(id);
+//        List<Ioder> orderdetail = orderService.findbyidorderdetail(id);
+//        Product product = productService.findbyidproduct(id);
+        List<Product> productList = productService.findAll();
+//        model.addAttribute("productDTO", product);
+        model.addAttribute("OrdersDetails", new OrdersDetails());
+//        model.addAttribute("order", orderdetail);
+//        model.addAttribute("Orderdetailcate", orderdetailcate);
+        model.addAttribute("ID", id);
+        model.addAttribute("productList", productList);
+        return "/function/add-orderdetail";
+    }
+
+    @PostMapping("/orderdetail-save/{Idord}")
+    public String addorderdetail(@ModelAttribute("OrderDetailDTO") OrderDetailDTO OrderDetailDTO,@PathVariable("Idord") int Idord) {
+        orderService.savedetail(Idord, OrderDetailDTO);
+        return "redirect:/orderdetail/" + Idord;
+    }
 }
 
-//bảng order sao cột idorder lại null
-//tại sao e ko dùng đc put vs delete mà e lại bị dùng post vì dùng 2 cái kia nó bị lỗi
 //thiếu bật tắt idorder theo ngày tháng năm
 //phân quyền
 //cách sử dụng one to many và many to many
-//cách sử dụng call api
+
 
 //optional là gì
 //khi nào thì sử dụng interface,abtract
 //cách debug để fixbug
 //xử dụng docker
 //phân biệt requetsparam vs @param
+//cách sử dụng call api
+//tại sao e ko dùng đc put vs delete mà e lại bị dùng post vì dùng 2 cái kia nó bị lỗi
+//bảng order sao cột idorder lại null

@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../font/fontawesome-free-6.4.0-web/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <style>
     .order-info {
@@ -150,7 +156,7 @@
                 <label th:text="${order.IDORDERS}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">ORDERS_DATE</label>
+                <label class="label">Ngày Đặt Hàng</label>
                 <label th:text="${order.ORDERS_DATE}" class="order-value"></label>
             </div>
             <div class="order-info">
@@ -158,7 +164,7 @@
                 <label th:text="${order.IDCUSTOMER}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">TOTAL_MONEY</label>
+                <label class="label">Tổng Tiền</label>
                 <label th:text="${order.TOTAL_MONEY}" class="order-value"></label>
             </div>
             <div class="order-info">
@@ -166,11 +172,11 @@
                 <label th:text="${order.Order_notes}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">NAME_RECIVER</label>
+                <label class="label">Tên Người Nhận</label>
                 <label th:text="${order.NAME_RECIVER}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">ADDRESS</label>
+                <label class="label">Địa Chỉ</label>
                 <label th:text="${order.ADDRESS}" class="order-value"></label>
             </div>
             <div class="order-info">
@@ -178,30 +184,43 @@
                 <label th:text="${order.PHONE}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">Paymentmethodname</label>
+                <label class="label">Phương Thức Thanh Toán</label>
                 <label th:text="${order.Paymentmethodname}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">PHONE</label>
+                <label class="label">Hình Ảnh Phương Thức</label>
                 <img class="order-value" th:src="'../images/logos/' + ${order.Paymentmethodnotes}" style="width:100px;">
             </div>
             <div class="order-info">
-                <label class="label">Orderspaymenttotal</label>
+                <label class="label">Giá Phương Thức Thanh Toán</label>
                 <label th:text="${order.Orderspaymenttotal}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">Transportmethodname</label>
+                <label class="label">Tên Phương Thức Vận Chuyển</label>
                 <label th:text="${order.Transportmethodname}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">Transportmethodnotes</label>
+                <label class="label">Trạng Thái Thanh Toán</label>
                 <label th:text="${order.Transportmethodnotes}" class="order-value"></label>
             </div>
             <div class="order-info">
-                <label class="label">Orderstransporttotal</label>
+                <label class="label">Giá Tiền Vận Chuyển</label>
                 <label th:text="${order.Orderstransporttotal}" class="order-value"></label>
             </div>
-
+            <div class="order-info">
+                <a class="a" th:href="@{/view/add-orderdetail/{id}(id = ${order.ID})}" style="font-size: 20px">
+                    <nav style="padding: 0 10px;">
+                        Thêm sản phẩm
+                    </nav>
+                </a>
+            </div>
+            <td>
+                <div class="update-button">
+                    <a th:href="@{/update-orderdetail/{id}(id = ${order.ID})}">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                </div>
+            </td>
         </div>
     </div>
     <table class="product-table">
@@ -211,6 +230,12 @@
         </tr>
         </thead>
         <tbody>
+<!--        <div class="add-button">-->
+<!--            <a th:href="@{/view/add-orderdetail}">-->
+<!--                Thêm Sản Phẩm-->
+<!--                <i class="fa-solid fa-circle-plus"></i>-->
+<!--            </a>-->
+<!--        </div>-->
         <tr th:each="order :${orderdetailcate}">
             <td>
                 <div th:text="${order.Product_name}"></div>
@@ -219,6 +244,13 @@
                 <div th:text="${#numbers.formatDecimal(order.Product_price, 0, 'COMMA', 0, 'POINT')}"></div>
             </td>
             <td><img th:src="'../images/it_service/' + ${order.Product_image}" style="width:100px;"></td>
+<!--            <td th:each="order ${order}">-->
+<!--                <div class="delete-button">-->
+<!--                    <a th:href="@{/delete-order/{id}(id = ${order.ID})}">-->
+<!--                        <i class="fa-regular fa-circle-xmark"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </td>-->
         </tr>
         </tbody>
     </table>

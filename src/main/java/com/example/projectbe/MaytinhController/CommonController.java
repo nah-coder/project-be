@@ -1,17 +1,25 @@
 package com.example.projectbe.MaytinhController;
 
+import com.example.projectbe.entity.CartItem;
 import com.example.projectbe.entity.Product;
 import com.example.projectbe.maytinhService.ProductService;
+import com.example.projectbe.maytinhService.Shopping_cartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class CommonController {
     @Autowired
     ProductService productService;
+    @Autowired
+    Shopping_cartService shoppingCartService;
 
     @GetMapping("")
     public String showindex(){
@@ -40,5 +48,53 @@ public class CommonController {
         Product productDTO = productService.findbyidproduct(id);
         model.addAttribute("productDTO", productDTO);
         return "layout/it_shop_detail";
+    }
+
+//    @GetMapping("/it_cart/{id}")
+//    public String show_cart(Model model, @PathVariable("id") int id ){
+//        model.addAttribute("id", id);
+//        Product productDTO = productService.findbyidproduct(id);
+//        model.addAttribute("productDTO", productDTO);
+//        return "layout/it_cart";
+//    }
+
+    @GetMapping("/show_cart")
+    public String showcart(Model model) {
+//        model.addAttribute("categoryDTO", new Category());
+//        List<Product> products = productService.findAll();
+        model.addAttribute("CART_ITEM", shoppingCartService.getAllItem());
+        model.addAttribute("TOTAL",shoppingCartService.getTotal());
+        return "layout/it_cart";
+    }
+
+    @GetMapping("/cart_add/{id}")
+    public String addCart(@PathVariable("id") Integer id){
+        Product product = productService.findbyidproduct(id);
+        if(product != null){
+            CartItem cartItem = new CartItem();
+            cartItem.setProductId(product.getId());
+            cartItem.setName(product.getName());
+            cartItem.setPrice(product.getPrice());
+            cartItem.setQty(1);
+            cartItem.setImage(product.getImage());
+            shoppingCartService.add(cartItem);
+        }
+        return "redirect:/show_cart";
+    }
+    @GetMapping("/clear")
+    public String clearcart(){
+        shoppingCartService.clear();
+        return "redirect:/show_cart";
+    }
+
+    @GetMapping("/remove/{productId}")
+    public String removecart(@PathVariable("productId") Integer productId) {
+        shoppingCartService.remove(productId);
+        return "redirect:/show_cart";
+    }
+    @PostMapping("/update")
+    public String update(@RequestParam("id") Integer id, @RequestParam("qty") Integer qty){
+        shoppingCartService.update(id,qty);
+        return "redirect:/show_cart";
     }
 }

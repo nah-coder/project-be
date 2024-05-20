@@ -2,8 +2,11 @@ package com.example.projectbe.maytinhService;
 
 import com.example.projectbe.dto.CategoryDTO;
 import com.example.projectbe.dto.OrderDTO;
+import com.example.projectbe.dto.OrderDetailDTO;
 import com.example.projectbe.entity.Category;
 import com.example.projectbe.entity.Orders;
+import com.example.projectbe.entity.OrdersDetails;
+import com.example.projectbe.maytinhrepository.OrderDetailRepository;
 import com.example.projectbe.maytinhrepository.OrderRepository;
 import com.example.projectbe.projection.Ioder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class OrderService {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     public List<Orders> findAll(){
         List<Orders> orders = orderRepository.findAll();
@@ -58,6 +63,15 @@ public class OrderService {
         orders.setAddress(orderDTO.getAddress());
         orders.setPhone(orderDTO.getPhone());
         orderRepository.save(orders);
+        return "Thêm thành công";
+    }
+
+    public String savedetail(int Idord, OrderDetailDTO orderDetailDTO) {
+        OrdersDetails ordersDetails1 = new OrdersDetails();
+//        ordersDetails1.setId(id);
+        ordersDetails1.setIdord(Idord);
+        ordersDetails1.setIdproduct(orderDetailDTO.getIdproduct());
+        orderDetailRepository.save(ordersDetails1);
         return "Thêm thành công";
     }
 
