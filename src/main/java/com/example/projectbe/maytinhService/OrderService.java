@@ -6,6 +6,7 @@ import com.example.projectbe.dto.OrderDetailDTO;
 import com.example.projectbe.entity.Category;
 import com.example.projectbe.entity.Orders;
 import com.example.projectbe.entity.OrdersDetails;
+import com.example.projectbe.entity.OrdersTransport;
 import com.example.projectbe.maytinhrepository.OrderDetailRepository;
 import com.example.projectbe.maytinhrepository.OrderRepository;
 import com.example.projectbe.projection.Ioder;
@@ -28,6 +29,11 @@ public class OrderService {
         return orders;
     }
 
+    public List<OrdersTransport> findAlll(){
+        List<OrdersTransport>ordersTransports = orderRepository.findAllOrders();
+        return ordersTransports;
+    }
+
     public List<Ioder> findbyidorderdetail(int id){
         return orderRepository.findbyidorderdetail(id);
     }
@@ -44,6 +50,8 @@ public class OrderService {
         }
         return optionalOrders.get();
     }
+
+
 
 
 //    public List<Category> findbyname(String name){
@@ -98,4 +106,22 @@ public class OrderService {
         orderRepository.deleteById(id);
         return "Xóa thành công";
     }
+
+    public OrdersDetails findbyidorderdetailfuction(int id){
+        Optional<OrdersDetails> optionalOrdersDetails = orderDetailRepository.findById(id);
+        if(optionalOrdersDetails.isEmpty()){
+            System.out.println("không tìm thấy sinh viên");
+            return null;
+        }
+        return optionalOrdersDetails.get();
+    }
+
+    public String Delete_orderdetail(int id){
+//        boolean idexist = orderRepository.existsById(id);
+//        if(!idexist)
+//            return "Không có id này !";
+        orderDetailRepository.deleteById(id);
+        return "Xóa thành công";
+    }
+
 }

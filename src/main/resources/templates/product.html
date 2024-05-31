@@ -149,7 +149,7 @@
     </div>
     <ul>
         <li>
-            <a href="/myhome"> <h4>Trang chủ</h4></a>
+            <a style="display: flex;justify-content: center;" href="/myhome"> <h4>Trang chủ</h4></a>
         </li>
         <li>
             <span class="icon"><i class="fas fa-box-open"></i></span>
@@ -204,13 +204,13 @@
             <th> Mô tả</th>
             <th> Ghi chú</th>
             <th> Hình Ảnh</th>
-            <th> Idcategory</th>
+<!--            <th> Idcategory</th>-->
             <th> Giá</th>
             <th> Số lượng</th>
-            <th> Ngày tạo</th>
-            <th> Ngày sửa</th>
-            <th> Người tạo</th>
-            <th> Người sửa</th>
+<!--            <th> Ngày tạo</th>-->
+<!--            <th> Ngày sửa</th>-->
+<!--            <th> Người tạo</th>-->
+<!--            <th> Người sửa</th>-->
             <th> Trạng thái</th>
             <th> Sửa</th>
             <th> Xoá</th>
@@ -223,13 +223,13 @@
             <td><div th:text="${product.description}"></div></td>
             <td><div th:text="${product.notes}"></div></td>
             <td><img th:src="'../images/it_service/'+${product.image} " style="width:100px;"></td>
-            <td><div th:text="${product.idcategory}"></div></td>
+<!--            <td><div th:text="${product.idcategory}"></div></td>-->
             <td><div th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></div></td>
             <td><div th:text="${product.quatity}"></div></td>
-            <td><div th:text="${product.createdDate}"></div></td>
-            <td><div th:text="${product.updatedDate}"></div></td>
-            <td><div th:text="${product.createdBy}"></div></td>
-            <td><div th:text="${product.updatedBy}"></div></td>
+<!--            <td><div th:text="${product.createdDate}"></div></td>-->
+<!--            <td><div th:text="${product.updatedDate}"></div></td>-->
+<!--            <td><div th:text="${product.createdBy}"></div></td>-->
+<!--            <td><div th:text="${product.updatedBy}"></div></td>-->
             <td><div th:text="${product.isactive}"></div></td>
             <td>
                 <div class="update-button">

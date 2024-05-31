@@ -5,6 +5,7 @@ import com.example.projectbe.entity.*;
 import com.example.projectbe.maytinhService.*;
 import com.example.projectbe.maytinhrepository.OrderRepository;
 import com.example.projectbe.projection.Ioder;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -33,14 +34,14 @@ public class WebController {
 
 
     @GetMapping("/admin")
-    public String showcategory(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageno" , defaultValue = "1")Integer pageno) {
+    public String showcategory(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
         Page<Category> categories = maytinhService.findAllpage(pageno);
-        if(keyword!=null && !keyword.isEmpty()){
-            categories = this.maytinhService.searchCategory(keyword,pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            categories = this.maytinhService.searchCategory(keyword, pageno);
             model.addAttribute("keyword", keyword);
         }
-        model.addAttribute("totalPage",categories.getTotalPages());
-        model.addAttribute("currentPage",pageno);
+        model.addAttribute("totalPage", categories.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("category_all", categories);
         return "indexx";
     }
@@ -97,7 +98,7 @@ public class WebController {
     public String showshop(Model model) {
 //        model.addAttribute("product_all", new Product());
         List<Product> products = productService.findAll();
-            model.addAttribute("product_all", products);
+        model.addAttribute("product_all", products);
         return "layout/it_shop";
     }
 
@@ -107,7 +108,6 @@ public class WebController {
         model.addAttribute("productDTO", productDTO);
         return "layout/it_shop_detail";
     }
-
 
 
     @GetMapping("/show_checkout")
@@ -300,7 +300,6 @@ public class WebController {
     }
 
 
-
     @GetMapping("/view/add-order")
     public String showAddorder(Model model) {
         model.addAttribute("orderDTO", new Orders());
@@ -353,7 +352,7 @@ public class WebController {
 
     @GetMapping("/view/add-payment")
     public String showAddpayment(Model model) {
-        model.addAttribute("paymentDTO",new PaymentMethod());
+        model.addAttribute("paymentDTO", new PaymentMethod());
         return "function/add-payment";
     }
 
@@ -365,7 +364,7 @@ public class WebController {
 
     @GetMapping("/update-payment/{id}")
     public String UpdatePayment(Model model,
-                                 @PathVariable("id") int id) {
+                                @PathVariable("id") int id) {
         model.addAttribute("id", id);
         PaymentMethod paymentMethod = paymentService.findbyidpay(id);
         model.addAttribute("paymentDTO", paymentMethod);
@@ -375,24 +374,24 @@ public class WebController {
     // sửa sinh viên
     @PostMapping("/update-payment/{id}")
     public String UpdatePayment(@PathVariable("id") int id,
-                                 @ModelAttribute("paymentDTO") PaymentDTO paymentDTO) {
+                                @ModelAttribute("paymentDTO") PaymentDTO paymentDTO) {
         paymentService.update(id, paymentDTO);
         return "redirect:/payment";
     }
 
     @GetMapping("/delete-payment/{id}")
     public String deletepayment(Model model,
-                                 @PathVariable("id") int id){
-        model.addAttribute("id",id);
+                                @PathVariable("id") int id) {
+        model.addAttribute("id", id);
         PaymentMethod paymentMethod = paymentService.findbyidpay(id);
         model.addAttribute("paymentDTO", paymentMethod);
         return "function/delete-payment";
     }
 
     // Xóa sinh viên theo ID
-    @PostMapping ("delete-payment/{id}")
+    @PostMapping("delete-payment/{id}")
     public String deletepayment(@PathVariable("id") int id,
-                                 @ModelAttribute("paymentDTO") PaymentDTO paymentDTO) {
+                                @ModelAttribute("paymentDTO") PaymentDTO paymentDTO) {
         paymentService.Delete(id);
         return "redirect:/payment";
     }
@@ -420,7 +419,7 @@ public class WebController {
 
     @GetMapping("/update-transport/{id}")
     public String Updatetransport(Model model,
-                                 @PathVariable("id") int id) {
+                                  @PathVariable("id") int id) {
         model.addAttribute("id", id);
         TransportMethod transportMethod = transportService.findbyidtransport(id);
         model.addAttribute("transportDTO", transportMethod);
@@ -430,7 +429,7 @@ public class WebController {
     // sửa sinh viên
     @PostMapping("/update-transport/{id}")
     public String UpdateTransport(@PathVariable("id") int id,
-                                 @ModelAttribute("transportDTO") TransportDTO transportDTO) {
+                                  @ModelAttribute("transportDTO") TransportDTO transportDTO) {
         transportService.update(id, transportDTO);
         return "redirect:/transport";
     }
@@ -438,17 +437,17 @@ public class WebController {
 
     @GetMapping("/delete-transport/{id}")
     public String deletetransport(Model model,
-                                 @PathVariable("id") int id){
-        model.addAttribute("id",id);
+                                  @PathVariable("id") int id) {
+        model.addAttribute("id", id);
         TransportMethod transportMethod = transportService.findbyidtransport(id);
         model.addAttribute("transportDTO", transportMethod);
         return "function/delete-transport";
     }
 
     // Xóa sinh viên theo ID
-    @PostMapping ("delete-transport/{id}")
+    @PostMapping("delete-transport/{id}")
     public String deletetransport(@PathVariable("id") int id,
-                                 @ModelAttribute("transportDTO") TransportDTO transportDTO) {
+                                  @ModelAttribute("transportDTO") TransportDTO transportDTO) {
         transportService.Delete(id);
         return "redirect:/transport";
     }
@@ -456,14 +455,14 @@ public class WebController {
 
     ///////productttttttttt
     @GetMapping("/product")
-    public String showproduct(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageno" , defaultValue = "1")Integer pageno) {
+    public String showproduct(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
         Page<Product> productPage = productService.findAllpage(pageno);
-        if(keyword!=null && !keyword.isEmpty()){
-            productPage = this.productService.searchProduct(keyword,pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            productPage = this.productService.searchProduct(keyword, pageno);
             model.addAttribute("keyword", keyword);
         }
-        model.addAttribute("totalPage",productPage.getTotalPages());
-        model.addAttribute("currentPage",pageno);
+        model.addAttribute("totalPage", productPage.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("product_all", productPage);
         return "product";
     }
@@ -514,16 +513,31 @@ public class WebController {
         return "redirect:/product";
     }
 
+//    @GetMapping("/orderdetail/{id}")
+//    public String Orderdetail(Model model, @PathVariable("id") int id) {
+//        List<Ioder> orderdetail = orderService.findbyidorderdetail(id);
+//        List<Ioder> orderdetailcate = orderService.findbyidorderdetailcate(id);
+////        List<OrdersDetails> ordersDetails = orderService.findAll();
+////        Orders orders = orderService.findbyidorder(id);
+//        model.addAttribute("order", orderdetail);
+////        model.addAttribute("ordersDetails", ordersDetails);
+//        model.addAttribute("orderdetailcate", orderdetailcate);
+//        model.addAttribute("id", id);
+//        return "orderdetail";
+//    }
+
     @GetMapping("/orderdetail/{id}")
     public String Orderdetail(Model model, @PathVariable("id") int id) {
         List<Ioder> orderdetail = orderService.findbyidorderdetail(id);
         List<Ioder> orderdetailcate = orderService.findbyidorderdetailcate(id);
-//        Orders orders = orderService.findbyidorder(id);
+
         model.addAttribute("order", orderdetail);
         model.addAttribute("orderdetailcate", orderdetailcate);
+
         model.addAttribute("id", id);
         return "orderdetail";
     }
+
 
     @GetMapping("/view/add-orderdetail/{id}")
     public String showAddorderdetail(Model model, @PathVariable("id") int id) {
@@ -541,15 +555,47 @@ public class WebController {
     }
 
     @PostMapping("/orderdetail-save/{Idord}")
-    public String addorderdetail(@ModelAttribute("OrderDetailDTO") OrderDetailDTO OrderDetailDTO,@PathVariable("Idord") int Idord) {
+    public String addorderdetail(@ModelAttribute("OrderDetailDTO") OrderDetailDTO OrderDetailDTO, @PathVariable("Idord") int Idord) {
         orderService.savedetail(Idord, OrderDetailDTO);
         return "redirect:/orderdetail/" + Idord;
+    }
+
+    //    @GetMapping("/delete-orderdetail/{id}/{Orderid}")
+//    public String deleteorderdetail(Model model,
+//                                @PathVariable("id") int id) {
+//        model.addAttribute("id", id);
+////        OrdersDetails ordersDetails = orderService.findbyidorderdetailfuction(OrderDetailsId);
+////        model.addAttribute("ordersDetails", ordersDetails);
+//        return "function/delete-orderdetail";
+//    }
+    @GetMapping("/delete-orderdetail-confirm/{Orderid}")
+    public String confirmDeleteOrderDetail(Model model,
+//                                           @PathVariable("id") int id,
+                                           @PathVariable("Orderid") int Orderid) {
+//        OrdersDetails ordersDetails = orderService.findbyidorderdetailfuction(Orderid);
+//        model.addAttribute("ordersDetails", ordersDetails);
+//        model.addAttribute("id", id);
+        model.addAttribute("Orderid", Orderid);
+        return "function/delete-orderdetail" ; // Trang xác nhận xóa
+    }
+
+    // Xóa sinh viên theo ID
+    @PostMapping("/delete-orderdetail/{orderid}")
+    public String deleterderdetail(@PathVariable("orderid") int orderid,
+                                   @ModelAttribute("ordersDetails") OrdersDetails ordersDetails) {
+        orderService.Delete_orderdetail(orderid);
+        return "redirect:/orderdetail/1" ;
     }
 }
 
 //thiếu bật tắt idorder theo ngày tháng năm
 //phân quyền
 //cách sử dụng one to many và many to many
+//cách đặt hàng xong bắn vào order
+//cách thanh toán
+//tại sao e ko dùng đc put vs delete mà e lại bị dùng post vì dùng 2 cái kia nó bị lỗi
+//bảng order sao cột idorder lại null
+
 
 
 //optional là gì
@@ -558,5 +604,5 @@ public class WebController {
 //xử dụng docker
 //phân biệt requetsparam vs @param
 //cách sử dụng call api
-//tại sao e ko dùng đc put vs delete mà e lại bị dùng post vì dùng 2 cái kia nó bị lỗi
-//bảng order sao cột idorder lại null
+
+

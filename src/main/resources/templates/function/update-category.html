@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm Sản Phẩm</title>
+    <title>Cập Nhật Danh Mục</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,7 +65,7 @@
 </head>
 <body>
 
-<h1> Sửa Sản Phẩm</h1>
+<h1> Cập Nhật Danh Mục</h1>
 <form th:action="@{/update-category/{id}(id = ${id})}" method="post" th:object="${categoryDTO}">
     <table>
         <tr>

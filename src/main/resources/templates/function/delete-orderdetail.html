@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Xóa Phương Thức Vận Chuyển</title>
+    <title>Xóa Chi Tiết Sản Phẩm</title>
 
     <style>
         body {
@@ -62,17 +62,10 @@
     </style>
 </head>
 <body>
-<h1>Xóa Phương Thức Vận Chuyển</h1>
-
-<form th:action="@{/delete-transport/{id}(id = ${id})}" method="post" >
-    Bạn có chắc chắn muốn xóa sản phẩm này không:
-    <!--    <input type="text" name="id">-->
-    <tr>
-        <td></td>
-        <td>
-            <input type="submit" value="submit"/>
-        </td>
-    </tr>
+<h1>Xóa Chi Tiết Sản Phẩm</h1>
+<form th:action="@{/delete-orderdetail/{Orderid}(Orderid=${Orderid})}" method="post">
+    Bạn có chắc chắn muốn xóa sản phẩm này không?
+    <input type="submit" value="Xóa"/>
 </form>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm Sản Phẩm</title>
+    <title>Cập Nhật Phương Thức Thanh Toán</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,7 +65,7 @@
 </head>
 <body>
 <h1>
-    Thêm Sản Phẩm
+    Cập Nhật Phương Thức Thanh Toán
     <form th:action="@{/update-payment/{id}(id = ${id})}" method="post" th:object="${paymentDTO}">
         <table>
             <tr>

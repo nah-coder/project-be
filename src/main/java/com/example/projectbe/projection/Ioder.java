@@ -15,8 +15,9 @@ public interface Ioder {
     String getOrderspaymenttotal();
     String getTransportmethodname();
     String getTransportmethodnotes();
-    String getOrderstransporttotal();
+    Double getOrderstransporttotal();
     String getProduct_name();
     String getProduct_image();
     String getProduct_price();
+    String getOrderDetailsId();
 }

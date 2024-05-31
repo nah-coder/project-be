@@ -226,10 +226,12 @@
                   </div>
                 </td>
                 <td class="col-sm-1 col-md-1" style="text-align: center">
-                  <input class="form-control" style="margin-top: 37px" name="qty" th:value="${CART_ITEM.qty}" type="number">
+                  <!-- Trong thẻ input số lượng, thêm sự kiện onchange -->
+                  <input class="form-control" style="margin-top: 37px" name="qty" th:value="${CART_ITEM.qty}" type="number" onchange="updatePrice(this)">
                 </td>
                 <td class="col-sm-1 col-md-1 text-center">
-                  <p class="price_table" th:text="${#numbers.formatDecimal(CART_ITEM.price, 0, 'COMMA', 2, 'POINT')}"></p>
+                  <!-- Thêm một phần tử p để hiển thị giá mới -->
+                  <p class="price_table" id="new_price" th:text="${#numbers.formatDecimal(CART_ITEM.price * CART_ITEM.qty, 0, 'COMMA', 2, 'POINT')}"></p></p>
                 </td>
                 <td class="col-sm-1 col-md-1">
 <!--                  <button type="button" >-->
@@ -279,13 +281,25 @@
                 <td><h4>Subtotal</h4></td>
                 <td class="text-right"><p th:text="${#numbers.formatDecimal(TOTAL, 2, 0)} + 'VNĐ'"></p></td>
               </tr>
-              <tr>
-                <td><h5>Estimated shipping</h5></td>
-                <td class="text-right"><h4>$5.00</h4></td>
-              </tr>
+<!--              <tr>-->
+<!--                <td><div class="order-info">-->
+<!--                  <select id="transportMethod" class="order-value" onchange="calculateAndUpdateTotalPrice()">-->
+<!--                    <option value="" selected disabled>Chọn phương thức vận chuyển</option>-->
+<!--                    <option th:each="transportMethod : ${transportMethods}"-->
+<!--                            th:value="${transportMethod.id}"-->
+<!--                            th:text="${transportMethod.name + ' - ' + transportMethod.total + ' VNĐ'}">-->
+<!--                    </option>-->
+<!--                  </select>-->
+
+
+
+
+<!--                </div></td>-->
+<!--                <td class="text-right"><h4>$5.00</h4></td>-->
+<!--              </tr>-->
               <tr>
                 <td><h3>Total</h3></td>
-                <td class="text-right"><h4>$55.00</h4></td>
+                <td class="text-right"><p th:text="${#numbers.formatDecimal(TOTAL, 2, 0)} + 'VNĐ'"></p></td>
               </tr>
               <tr>
                 <td><button type="button" class="button"><a href="/show_shop">Addmore</a></button></td>

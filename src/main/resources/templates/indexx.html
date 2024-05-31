@@ -148,7 +148,7 @@
     </div>
     <ul>
         <li>
-            <a href="/myhome"><h4>Trang chủ</h4></a>
+            <a style="display: flex;justify-content: center;" href="/myhome"><h4>Trang chủ</h4></a>
         </li>
         <li>
             <span class="icon"><i class="fas fa-box-open"></i></span>
@@ -178,7 +178,7 @@
     </ul>
 </div>
 <div class="content">
-    <h1>Danh sách sản phẩm</h1>
+    <h1 >Danh sách sản phẩm</h1>
     <table>
         <div class="content-search-add">
             <div class="add-button">
@@ -203,12 +203,12 @@
             <th> Tên Sản Phẩm</th>
             <th> Ghi Chú</th>
             <th> Hình Ảnh</th>
-            <th> idparent</th>
+            <th> số lượng</th>
             <th> Trạng thái</th>
-            <th> Ngày nhập</th>
-            <th> Ngày sửa</th>
-            <th> Người nhập</th>
-            <th> Người sửa</th>
+<!--            <th> Ngày nhập</th>-->
+<!--            <th> Ngày sửa</th>-->
+<!--            <th> Người nhập</th>-->
+<!--            <th> Người sửa</th>-->
             <th> Trạng thái</th>
             <th> Sửa</th>
             <th> Xoá</th>
@@ -236,18 +236,18 @@
                     <span class="off">Tắt</span>
                 </button>
             </td>
-            <td>
-                <div th:text="${category.createdDate}"></div>
-            </td>
-            <td>
-                <div th:text="${category.updatedDate}"></div>
-            </td>
-            <td>
-                <div th:text="${category.createdBy}"></div>
-            </td>
-            <td>
-                <div th:text="${category.updatedBy}"></div>
-            </td>
+<!--            <td>-->
+<!--                <div th:text="${category.createdDate}"></div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <div th:text="${category.updatedDate}"></div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <div th:text="${category.createdBy}"></div>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <div th:text="${category.updatedBy}"></div>-->
+<!--            </td>-->
             <td>
                 <div th:text="${category.isactive}"></div>
             </td>

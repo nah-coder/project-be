@@ -144,12 +144,12 @@
 <div class="sidebar">
     <div class="menu-center">
         <div class="logo" style="text-align: center">
-            <a href="/myhome"><img style="width: 150px;" src="images/logos/it_logo.png"></a>
+            <a  href="/myhome"><img style="width: 150px;" src="images/logos/it_logo.png"></a>
         </div>
     </div>
     <ul>
         <li>
-            <a href="/myhome"> <h4>Trang chủ</h4></a>
+            <a style="display: flex;justify-content: center;" href="/myhome"> <h4>Trang chủ</h4></a>
         </li>
         <li>
             <span class="icon"><i class="fas fa-box-open"></i></span>
@@ -193,7 +193,7 @@
             <th> Tên Thanh toán</th>
             <th> Phương thức thanh toán</th>
             <th> Ngày tạo</th>
-            <th> Ngày sửa</th>
+<!--            <th> Ngày sửa</th>-->
             <th> Trạng thái</th>
             <th> Sửa</th>
             <th> Xoá</th>
@@ -206,7 +206,7 @@
 <!--            <td><div th:text="${payment_method.notes}"></div></td>-->
             <td><img th:src="'../images/logos/'+${payment_method.notes}" style="width:100px;"></td>
             <td><div th:text="${payment_method.createdDate}"></div></td>
-            <td><div th:text="${payment_method.updatedDate}"></div></td>
+<!--            <td><div th:text="${payment_method.updatedDate}"></div></td>-->
             <td><div th:text="${payment_method.isactive}"></div></td>
             <td>
                 <div class="update-button">

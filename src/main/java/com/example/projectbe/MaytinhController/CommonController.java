@@ -2,8 +2,10 @@ package com.example.projectbe.MaytinhController;
 
 import com.example.projectbe.entity.CartItem;
 import com.example.projectbe.entity.Product;
+import com.example.projectbe.maytinhService.OrdersTransportService;
 import com.example.projectbe.maytinhService.ProductService;
 import com.example.projectbe.maytinhService.Shopping_cartService;
+import com.example.projectbe.projection.TransportProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class CommonController {
+
     @Autowired
     ProductService productService;
     @Autowired
@@ -97,4 +100,11 @@ public class CommonController {
         shoppingCartService.update(id,qty);
         return "redirect:/show_cart";
     }
+//    @GetMapping("/orderdetail/{id}")
+//    public String orderDetail(Model model, @PathVariable("id") int id) {
+//        List<TransportProjection> orderTransportDetails = ordersTransportService.getTransportsByOrderId(id);
+//        model.addAttribute("orderdetailall", orderTransportDetails);
+//        model.addAttribute("id", id);
+//        return "orderdetail";
+//    }
 }

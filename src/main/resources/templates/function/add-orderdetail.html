@@ -66,10 +66,30 @@
 <body>
 <h1>
     Thêm Sản Phẩm
-    <form th:action="@{/orderdetail-save/{id}(id=${ID})}" method="post" th:object="${OrdersDetails}">
+    <form th:action="@{/orderdetail-save/{id}(id=${id})}" method="post" th:object="${OrdersDetails}">
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td>Sản Phẩm</td>-->
+<!--                <td>-->
+<!--                    <input type="text" th:field="${orderDTO.Product_name}">-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Giá</td>-->
+<!--                <td>-->
+<!--                    <input type="number" th:field="${orderDTO.Product_price}">-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Hình Ảnh</td>-->
+<!--                <td>-->
+<!--                    <input type="file" th:field="${orderDTO.Product_image}" style="width:100px;">-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--        </table>-->
         <div class="form-group">
             <label>ID khách hàng:</label>
-            <input type="text" class="form-control" th:value="${ID}">
+            <input type="text" class="form-control" th:value="${ID}" >
         </div>
         <div class="form-group">
             <label for="productId">Chọn sản phẩm:</label>

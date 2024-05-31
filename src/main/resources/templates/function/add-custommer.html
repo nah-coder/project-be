@@ -65,7 +65,7 @@
 </head>
 <body>
 <h1>
-    Thêm Sản Phẩm
+    Thêm Khách Hàng
     <form th:action="@{/customer-save}" method="post" th:object="${customerDTO}">
         <table>
             <tr>
@@ -77,7 +77,7 @@
             <tr>
                 <td>name:</td>
                 <td>
-                    <input type="number" th:field="${customerDTO.name}">
+                    <input type="text" th:field="${customerDTO.name}">
                 </td>
             </tr>
             <tr>

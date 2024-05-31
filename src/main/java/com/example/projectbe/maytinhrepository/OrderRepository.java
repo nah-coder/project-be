@@ -1,6 +1,7 @@
 package com.example.projectbe.maytinhrepository;
 
 import com.example.projectbe.entity.Orders;
+import com.example.projectbe.entity.OrdersTransport;
 import com.example.projectbe.projection.Ioder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -42,6 +43,7 @@ public interface OrderRepository extends JpaRepository<Orders,Integer> {
             ,nativeQuery = true)
     List<Ioder> findbyidorderdetail(@Param("ID") int ID);
     @Query(value = "SELECT \n" +
+            "    od.ID AS orderDetailsId,\n" +
             "    p.NAME AS product_name,\n" +
             "    p.PRICE AS product_price,\n" +
             "    p.IMAGE AS product_image\n" +
@@ -55,4 +57,7 @@ public interface OrderRepository extends JpaRepository<Orders,Integer> {
             "    o.ID = :ID\n"
             ,nativeQuery = true)
     List<Ioder> findbyidorderdetailcate(@Param("ID") int ID);
+
+    @Query("SELECT o FROM OrdersTransport o")
+    List<OrdersTransport> findAllOrders();
 }
