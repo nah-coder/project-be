@@ -11,8 +11,13 @@ import com.example.projectbe.maytinhrepository.OrderDetailRepository;
 import com.example.projectbe.maytinhrepository.OrderRepository;
 import com.example.projectbe.projection.Ioder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.Order;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +57,23 @@ public class OrderService {
     }
 
 
+    public Page<Orders> findAllpage(Integer pageno){
+        Pageable pageable = PageRequest.of(pageno-1,4);
+        return orderRepository.findAll(pageable);
+    }
 
+    public List<Orders> searchOrder(String keyword){
+        return  orderRepository.searchOrdersBy(keyword);
+    }
+
+    public Page<Orders> searchOrder(String keyword,Integer pageno){
+        List list = this.searchOrder(keyword);
+        Pageable pageable = PageRequest.of(pageno-1,2);
+        Integer start = (int) pageable.getOffset();
+        Integer end = (int)(pageable.getOffset() + pageable.getPageSize() > list.size() ? list.size() : pageable.getOffset() + pageable.getPageSize());
+        list = list.subList(start, end);
+        return new PageImpl<Orders>(list,pageable,this.searchOrder(keyword).size());
+    }
 
 //    public List<Category> findbyname(String name){
 //        List<Category> categories = maytinhRepository.findbyname(name);

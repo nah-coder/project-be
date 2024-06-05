@@ -4,9 +4,14 @@ import com.example.projectbe.dto.CategoryDTO;
 import com.example.projectbe.dto.CustommerDTO;
 import com.example.projectbe.entity.Category;
 import com.example.projectbe.entity.Customer;
+import com.example.projectbe.entity.TransportMethod;
 import com.example.projectbe.maytinhrepository.CustomerRepository;
 import com.sun.xml.bind.v2.model.core.ID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,6 +33,24 @@ public class CustomerService {
             return null;
         }
         return optionalCustomer.get();
+    }
+
+    public Page<Customer> findAllpage(Integer pageno){
+        Pageable pageable = PageRequest.of(pageno-1,4);
+        return  customerRepository.findAll(pageable);
+    }
+
+    public List<Customer> searchCustomer(String keyword){
+        return  customerRepository.searchCustomerBy(keyword);
+    }
+
+    public Page<Customer> searchCustomer(String keyword,Integer pageno){
+        List list = this.searchCustomer(keyword);
+        Pageable pageable = PageRequest.of(pageno-1,2);
+        Integer start = (int) pageable.getOffset();
+        Integer end = (int)(pageable.getOffset() + pageable.getPageSize() > list.size() ? list.size() : pageable.getOffset() + pageable.getPageSize());
+        list = list.subList(start, end);
+        return new PageImpl<Customer>(list,pageable,this.searchCustomer(keyword).size());
     }
 
 //    public List<Category> findbyname(String name){

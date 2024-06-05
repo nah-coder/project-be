@@ -6,6 +6,10 @@ import com.example.projectbe.entity.Category;
 import com.example.projectbe.entity.PaymentMethod;
 import com.example.projectbe.maytinhrepository.Payment_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,6 +33,24 @@ public class PaymentService {
             return null;
         }
         return optionalPaymentMethod.get();
+    }
+
+    public Page<PaymentMethod> findAllpage(Integer pageno){
+        Pageable pageable = PageRequest.of(pageno-1,4);
+        return  paymentRepository.findAll(pageable);
+    }
+
+    public List<PaymentMethod> searchPaymentMethod(String keyword){
+        return  paymentRepository.searchPaymentMethodBy(keyword);
+    }
+
+    public Page<PaymentMethod> searchPaymentMethod(String keyword,Integer pageno){
+        List list = this.searchPaymentMethod(keyword);
+        Pageable pageable = PageRequest.of(pageno-1,2);
+        Integer start = (int) pageable.getOffset();
+        Integer end = (int)(pageable.getOffset() + pageable.getPageSize() > list.size() ? list.size() : pageable.getOffset() + pageable.getPageSize());
+        list = list.subList(start, end);
+        return new PageImpl<PaymentMethod>(list,pageable,this.searchPaymentMethod(keyword).size());
     }
 
 //    public List<Category> findbyname(String name){

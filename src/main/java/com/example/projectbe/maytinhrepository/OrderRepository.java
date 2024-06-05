@@ -1,5 +1,6 @@
 package com.example.projectbe.maytinhrepository;
 
+import com.example.projectbe.entity.Category;
 import com.example.projectbe.entity.Orders;
 import com.example.projectbe.entity.OrdersTransport;
 import com.example.projectbe.projection.Ioder;
@@ -60,4 +61,7 @@ public interface OrderRepository extends JpaRepository<Orders,Integer> {
 
     @Query("SELECT o FROM OrdersTransport o")
     List<OrdersTransport> findAllOrders();
+
+    @Query("SELECT c FROM Orders c WHERE c.nameReciver LIKE %?1%")
+    List<Orders> searchOrdersBy(String keyword);
 }

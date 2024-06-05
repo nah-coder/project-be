@@ -242,11 +242,19 @@ public class WebController {
     }
 
     @GetMapping("/custommer")
-    public String showcustomer(Model model) {
-        List<Customer> customers = customerService.findAll();
+    public String showcustomer(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
+        Page<Customer> customers = customerService.findAllpage(pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            customers = this.customerService.searchCustomer(keyword, pageno);
+            model.addAttribute("keyword", keyword);
+        }
+        model.addAttribute("totalPage", customers.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("custommer", customers);
         return "Custommer";
     }
+
+
 
     @GetMapping("/view/add-customer")
     public String showAddcustomer(Model model) {
@@ -293,11 +301,30 @@ public class WebController {
 
     //orderrrrrr
     @GetMapping("/order")
-    public String showorder(Model model) {
-        List<Orders> orders = orderService.findAll();
+    public String showorder(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
+        Page<Orders> orders = orderService.findAllpage(pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            orders = this.orderService.searchOrder(keyword, pageno);
+            model.addAttribute("keyword", keyword);
+        }
+        model.addAttribute("totalPage", orders.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("order", orders);
         return "order";
     }
+
+    //    @GetMapping("/payment")
+//    public String showpayment(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
+//        Page<PaymentMethod> paymentMethods = paymentService.findAllpage(pageno);
+//        if (keyword != null && !keyword.isEmpty()) {
+//            paymentMethods = this.paymentService.searchPaymentMethod(keyword, pageno);
+//            model.addAttribute("keyword", keyword);
+//        }
+//        model.addAttribute("totalPage", paymentMethods.getTotalPages());
+//        model.addAttribute("currentPage", pageno);
+//        model.addAttribute("payment_methodall", paymentMethods);
+//        return "Payment_method";
+//    }
 
 
     @GetMapping("/view/add-order")
@@ -344,11 +371,19 @@ public class WebController {
 
     //paymentttt
     @GetMapping("/payment")
-    public String showpayment(Model model) {
-        List<PaymentMethod> paymentMethods = paymentService.findAll();
+    public String showpayment(Model model, @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
+        Page<PaymentMethod> paymentMethods = paymentService.findAllpage(pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            paymentMethods = this.paymentService.searchPaymentMethod(keyword, pageno);
+            model.addAttribute("keyword", keyword);
+        }
+        model.addAttribute("totalPage", paymentMethods.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("payment_methodall", paymentMethods);
         return "Payment_method";
     }
+
+//
 
     @GetMapping("/view/add-payment")
     public String showAddpayment(Model model) {
@@ -399,11 +434,19 @@ public class WebController {
 //transsssss
 
     @GetMapping("/transport")
-    public String showtransport(Model model) {
-        List<TransportMethod> transportMethods = transportService.findAll();
+    public String showtransport(Model model , @Param("keyword") String keyword, @RequestParam(name = "pageno", defaultValue = "1") Integer pageno) {
+        Page<TransportMethod> transportMethods = transportService.findAllpage(pageno);
+        if (keyword != null && !keyword.isEmpty()) {
+            transportMethods = this.transportService.searchTransportMethod(keyword, pageno);
+            model.addAttribute("keyword", keyword);
+        }
+        model.addAttribute("totalPage", transportMethods.getTotalPages());
+        model.addAttribute("currentPage", pageno);
         model.addAttribute("transport_methodall", transportMethods);
         return "Transport_method";
     }
+
+
 
     @GetMapping("/view/add-transport")
     public String showAddTransport(Model model) {
@@ -538,7 +581,6 @@ public class WebController {
         return "orderdetail";
     }
 
-
     @GetMapping("/view/add-orderdetail/{id}")
     public String showAddorderdetail(Model model, @PathVariable("id") int id) {
 //        List<Ioder> orderdetailcate = orderService.findbyidorderdetailcate(id);
@@ -553,6 +595,14 @@ public class WebController {
         model.addAttribute("productList", productList);
         return "/function/add-orderdetail";
     }
+
+//    @GetMapping("/info")
+//    public String showAddinfo(Model model) {
+//        List<Product> productList = productService.findAll();
+//        model.addAttribute("OrdersDetails", new OrdersDetails());
+//        model.addAttribute("productList", productList);
+//        return "function/add-info";
+//    }
 
     @PostMapping("/orderdetail-save/{Idord}")
     public String addorderdetail(@ModelAttribute("OrderDetailDTO") OrderDetailDTO OrderDetailDTO, @PathVariable("Idord") int Idord) {
@@ -584,7 +634,7 @@ public class WebController {
     public String deleterderdetail(@PathVariable("orderid") int orderid,
                                    @ModelAttribute("ordersDetails") OrdersDetails ordersDetails) {
         orderService.Delete_orderdetail(orderid);
-        return "redirect:/orderdetail/1" ;
+        return "redirect:/order";
     }
 }
 
@@ -595,6 +645,7 @@ public class WebController {
 //cách thanh toán
 //tại sao e ko dùng đc put vs delete mà e lại bị dùng post vì dùng 2 cái kia nó bị lỗi
 //bảng order sao cột idorder lại null
+//cách làm báo cáo
 
 
 

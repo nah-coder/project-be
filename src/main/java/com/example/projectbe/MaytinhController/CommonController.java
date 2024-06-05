@@ -1,7 +1,10 @@
 package com.example.projectbe.MaytinhController;
 
+import com.example.projectbe.dto.OrderDTO;
 import com.example.projectbe.entity.CartItem;
+import com.example.projectbe.entity.Orders;
 import com.example.projectbe.entity.Product;
+import com.example.projectbe.maytinhService.OrderService;
 import com.example.projectbe.maytinhService.OrdersTransportService;
 import com.example.projectbe.maytinhService.ProductService;
 import com.example.projectbe.maytinhService.Shopping_cartService;
@@ -9,10 +12,7 @@ import com.example.projectbe.projection.TransportProjection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +23,10 @@ public class CommonController {
     ProductService productService;
     @Autowired
     Shopping_cartService shoppingCartService;
+    @Autowired
+    OrderService orderService;
 
-    @GetMapping("")
+    @GetMapping("/User")
     public String showindex(){
         return "layout/index";
     }
@@ -84,6 +86,7 @@ public class CommonController {
         }
         return "redirect:/show_cart";
     }
+
     @GetMapping("/clear")
     public String clearcart(){
         shoppingCartService.clear();
@@ -107,4 +110,16 @@ public class CommonController {
 //        model.addAttribute("id", id);
 //        return "orderdetail";
 //    }
+
+    @GetMapping("info")
+    public String info(Model model){
+        model.addAttribute("orderDTO", new Orders());
+        return "function/add-info";
+    }
+
+    @PostMapping("/orderinfo-save")
+    public String addorder(@ModelAttribute("orderDTO") OrderDTO orderDTO) {
+        orderService.save(orderDTO);
+        return "redirect:/myhome";
+    }
 }

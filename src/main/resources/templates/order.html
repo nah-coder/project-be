@@ -137,7 +137,10 @@
         .page-link{
             color: black;
         }
-
+        .content-search-add{
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -182,18 +185,28 @@
     <h1>Danh sách đơn đặt hàng</h1>
     <table>
         <thead>
-        <div class="add-button">
-            <a th:href="@{/view/add-order}">
-                Thêm Đơn Hàng
-                <i class="fa-solid fa-circle-plus"></i>
-            </a>
+        <div class="content-search-add">
+            <div class="add-button">
+                <a th:href="@{/view/add-order}">
+                    Thêm Đơn Hàng
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
+            </div>
+            <form action="">
+                <div class="search" style="width: 182px">
+                    <input type="text" name="keyword" placeholder="Search" style="width: 150px;" th:value="${keyword}">
+                    <div>
+                        <button type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
         <tr>
             <th> ID</th>
-            <th> idorder</th>
+<!--            <th> idorder</th>-->
             <th> Ngày đặt hàng</th>
             <th> idcustomer</th>
-            <th> Tổng tiền</th>
+<!--            <th> Tổng tiền</th>-->
             <th> Ghi chứ</th>
             <th> Tên người nhận</th>
             <th> Địa chỉ</th>
@@ -206,10 +219,10 @@
         <tbody>
         <tr th:each="order :${order}">
             <td><div th:text="${order.id}"></div></td>
-            <td><div th:text="${order.idorders}"></div></td>
+<!--            <td><div th:text="${order.idorders}"></div></td>-->
             <td><div th:text="${order.ordersDate}"></div></td>
             <td><div th:text="${order.idcustomer}"></div></td>
-            <td><div th:text="${order.totalMoney}"></div></td>
+<!--            <td><div th:text="${order.totalMoney}"></div></td>-->
             <td><div th:text="${order.notes}"></div></td>
             <td><div th:text="${order.nameReciver}"></div></td>
             <td><div th:text="${order.address}"></div></td>
@@ -238,7 +251,13 @@
         </tr>
         </tbody>
     </table>
-
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li th:if="${currentPage > 1}" class="page-item"><a class="page-link" th:href="@{'?pageno='+${(currentPage)-1}}"><<</a></li>
+            <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage==i ? 'active' : ''}" class="page-item"><a class="page-link" th:href="@{ ${keyword != null && keyword != ''? '?keyword=' + keyword + '&':'?'} + 'pageno='+${i}}" th:text="${i}"></a></li>
+            <li th:if="${currentPage < totalPage}" class="page-item"><a class="page-link" th:href="@{'?pageno='+${currentPage+1}}">>></a></li>
+        </ul>
+    </nav>
 
 </div>
 
